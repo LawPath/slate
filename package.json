@@ -4,6 +4,15 @@
   "workspaces": [
     "packages/*"
   ],
+  "version": "0.0.1",
+  "main": "slate/lib/slate.js",
+  "module": "slate/lib/slate.es.js",
+  "umd": "slate/dist/slate.js",
+  "umdMin": "slate/dist/slate.min.js",
+  "files": [
+    "slate/dist/",
+    "slate/lib/"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

@@ -88,7 +88,8 @@ function configure(pkg, env, target) {
       input,
       output: {
         format: 'umd',
-        file: `packages/${pkg.name}/${isProd ? pkg.umdMin : pkg.umd}`,
+        // file: `packages/${pkg.name}/${isProd ? pkg.umdMin : pkg.umd}`,
+        file: `${pkg.name}/${isProd ? pkg.umdMin : pkg.umd}`,
         exports: 'named',
         name: startCase(pkg.name).replace(/ /g, ''),
         globals: pkg.umdGlobals,
@@ -103,12 +104,14 @@ function configure(pkg, env, target) {
       input,
       output: [
         {
-          file: `packages/${pkg.name}/${pkg.module}`,
+          // file: `packages/${pkg.name}/${pkg.module}`,
+          file: `${pkg.name}/${pkg.module}`,
           format: 'es',
           sourcemap: true,
         },
         {
-          file: `packages/${pkg.name}/${pkg.main}`,
+          // file: `packages/${pkg.name}/${pkg.main}`,
+          file: `${pkg.name}/${pkg.main}`,
           format: 'cjs',
           exports: 'named',
           sourcemap: true,
@@ -117,8 +120,8 @@ function configure(pkg, env, target) {
       // We need to explicitly state which modules are external, meaning that
       // they are present at runtime. In the case of non-UMD configs, this means
       // all non-Slate packages.
-      external: id => {
-        return !!deps.find(dep => dep === id || id.startsWith(`${dep}/`))
+      external: (id) => {
+        return !!deps.find((dep) => dep === id || id.startsWith(`${dep}/`))
       },
     }
   }

@@ -326,12 +326,10 @@ class Text extends Record(DEFAULTS) {
 
   setMark(properties, newProperties) {
     const { marks } = this
-    console.log('This function is called: ', properties)
-
     const mark = Mark.create(
       Object.keys(properties).length === 0 && properties.constructor === Object
-        ? properties
-        : ''
+        ? ''
+        : properties
     )
     const newMark = mark.merge(newProperties)
     const next = marks.remove(mark).add(newMark)

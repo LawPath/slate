@@ -2941,8 +2941,13 @@ var Text = function (_Record) {
     key: 'setMark',
     value: function setMark(properties, newProperties) {
       var marks = this.marks;
+      // const mark = Mark.create(
+      //   Object.keys(properties).length === 0 && properties.constructor === Object
+      //     ? ''
+      //     : properties
+      // )
 
-      var mark = Mark.create(Object.keys(properties).length === 0 && properties.constructor === Object ? '' : properties);
+      var mark = Mark.create(properties);
       var newMark = mark.merge(newProperties);
       var next = marks.remove(mark).add(newMark);
       var node = this.set('marks', next);

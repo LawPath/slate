@@ -20,7 +20,14 @@
     "lodash": "^4.17.4",
     "tiny-invariant": "^1.0.1",
     "tiny-warning": "^0.0.3",
-    "type-of": "^2.0.1",
+    "type-of": "^2.0.1"
+  },
+  "peerDependencies": {
+    "immutable": ">=3.8.1 || >4.0.0-rc"
+  },
+  "devDependencies": {
+    "slate-dev-test-utils": "^0.0.1",
+    "slate-hyperscript": "^0.13.9 <0.50.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
@@ -94,13 +101,6 @@
     "webpack": "^3.11.0",
     "webpack-cli": "1.5.3",
     "webpack-dev-server": "2.11.5"
-  },
-  "peerDependencies": {
-    "immutable": ">=3.8.1 || >4.0.0-rc"
-  },
-  "devDependencies": {
-    "slate-dev-test-utils": "^0.0.1",
-    "slate-hyperscript": "^0.13.9 <0.50.0"
   },
   "scripts": {
     "clean": "rimraf ./dist ./lib ./node_modules",

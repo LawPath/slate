@@ -19,7 +19,6 @@ const config = {
     // https://github.com/zloirock/core-js/issues/317
     'element-closest',
     'react-hot-loader/patch',
-    './examples/index.js',
   ],
   output: {
     path: path.resolve(__dirname, '../../build'),
@@ -91,7 +90,6 @@ const config = {
         'https://fonts.googleapis.com/icon?family=Material+Icons',
       ],
     }),
-    IS_PROD && new CopyWebpackPlugin(['examples/CNAME']),
     IS_PROD && new UglifyJSPlugin({ sourceMap: true }),
     IS_DEV && new NamedModulesPlugin(),
     IS_DEV && new HotModuleReplacementPlugin(),

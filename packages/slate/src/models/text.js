@@ -109,7 +109,7 @@ class Text extends Record(DEFAULTS) {
    */
 
   static isTextList(any) {
-    return List.isList(any) && any.every(item => Text.isText(item))
+    return List.isList(any) && any.every((item) => Text.isText(item))
   }
 
   /**
@@ -172,9 +172,8 @@ class Text extends Record(DEFAULTS) {
     }
 
     // Helper to compile the leaves for a `kind` of format.
-    const compile = kind => {
-      const formats =
-        kind === 'annotations' ? annotations.values() : decorations
+    const compile = (kind) => {
+      const formats = kind === 'annotations' ? annotations.values() : decorations
 
       for (const format of formats) {
         const { start, end } = format
@@ -238,7 +237,7 @@ class Text extends Record(DEFAULTS) {
     compile('annotations')
     compile('decorations')
 
-    leaves = leaves.map(leaf => {
+    leaves = leaves.map((leaf) => {
       return new Leaf({
         ...leaf,
         annotations: List(leaf.annotations),
@@ -306,7 +305,7 @@ class Text extends Record(DEFAULTS) {
     const object = {
       object: this.object,
       text: this.text,
-      marks: this.marks.toArray().map(m => m.toJSON()),
+      marks: this.marks.toArray().map((m) => m.toJSON()),
     }
 
     if (options.preserveKeys) {
@@ -326,16 +325,26 @@ class Text extends Record(DEFAULTS) {
 
   setMark(properties, newProperties) {
     const { marks } = this
-    // const mark = Mark.create(
-    //   Object.keys(properties).length === 0 && properties.constructor === Object
-    //     ? ''
-    //     : properties
-    // )
-    const mark = Mark.create(properties)
-    const newMark = mark.merge(newProperties)
-    const next = marks.remove(mark).add(newMark)
-    const node = this.set('marks', next)
-    return node
+    try {
+      var mark = Mark.create(properties)
+      var newMark = mark.merge(newProperties)
+      var next = marks.remove(mark).add(newMark)
+      var node = this.set('marks', next)
+      return node
+    } catch (error) {
+      if (!properties && newProperties) {
+        try {
+          var mark = Mark.create(newProperties)
+          var next = marks.remove(mark).add(mark)
+          var node = this.set('marks', next)
+          return node
+        } catch (error) {
+          console.log('mark newProperties is null  ', error)
+        }
+      }
+      console.log('mark properties is null', error)
+    }
+    return this
   }
 
   /**

@@ -88,7 +88,7 @@ function configure(pkg, env, target) {
       input,
       output: {
         format: 'umd',
-        file: `packages/${pkg.name}/${isProd ? pkg.umdMin : pkg.umd}`,
+        file: `dist/${isProd ? pkg.umdMin : pkg.umd}`,
         exports: 'named',
         name: startCase(pkg.name).replace(/ /g, ''),
         globals: pkg.umdGlobals,
@@ -103,12 +103,12 @@ function configure(pkg, env, target) {
       input,
       output: [
         {
-          file: `packages/${pkg.name}/${pkg.module}`,
+          file: `dist/${pkg.module}`,
           format: 'es',
           sourcemap: true,
         },
         {
-          file: `packages/${pkg.name}/${pkg.main}`,
+          file: `dist/${pkg.main}`,
           format: 'cjs',
           exports: 'named',
           sourcemap: true,

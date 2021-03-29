@@ -43,15 +43,7 @@ function configure(pkg, env, target) {
         // https://github.com/rollup/rollup-plugin-commonjs#custom-named-exports
         namedExports: {
           esrever: ['reverse'],
-          immutable: [
-            'List',
-            'Map',
-            'Record',
-            'OrderedSet',
-            'Set',
-            'Stack',
-            'is',
-          ],
+          immutable: ['List', 'Map', 'Record', 'OrderedSet', 'Set', 'Stack', 'is'],
           'react-dom': ['findDOMNode'],
           'react-dom/server': ['renderToStaticMarkup'],
         },
@@ -88,8 +80,7 @@ function configure(pkg, env, target) {
       input,
       output: {
         format: 'umd',
-        // file: `packages/${pkg.name}/${isProd ? pkg.umdMin : pkg.umd}`,
-        file: `dist/${isProd ? pkg.umdMin : pkg.umd}`,
+        file: `${isProd ? pkg.umdMin : pkg.umd}`,
         exports: 'named',
         name: startCase(pkg.name).replace(/ /g, ''),
         globals: pkg.umdGlobals,
@@ -104,14 +95,12 @@ function configure(pkg, env, target) {
       input,
       output: [
         {
-          // file: `packages/${pkg.name}/${pkg.module}`,
-          file: `dist/${pkg.module}`,
+          file: `${pkg.module}`,
           format: 'es',
           sourcemap: true,
         },
         {
-          // file: `packages/${pkg.name}/${pkg.main}`,
-          file: `dist/${pkg.main}`,
+          file: `${pkg.main}`,
           format: 'cjs',
           exports: 'named',
           sourcemap: true,
@@ -120,8 +109,8 @@ function configure(pkg, env, target) {
       // We need to explicitly state which modules are external, meaning that
       // they are present at runtime. In the case of non-UMD configs, this means
       // all non-Slate packages.
-      external: (id) => {
-        return !!deps.find((dep) => dep === id || id.startsWith(`${dep}/`))
+      external: id => {
+        return !!deps.find(dep => dep === id || id.startsWith(`${dep}/`))
       },
     }
   }

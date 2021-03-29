@@ -105,7 +105,9 @@
   "scripts": {
     "clean": "rimraf ./dist ./lib ./node_modules",
     "build": "rollup --config ./support/rollup/config.js",
-    "build:production": "cross-env NODE_ENV=production rollup --config ./support/rollup/config.js && cross-env NODE_ENV=production webpack --config support/webpack/config.js"
+    "build:production": "cross-env NODE_ENV=production rollup --config ./support/rollup/config.js && cross-env NODE_ENV=production webpack --config support/webpack/config.js",
+    "prepublishOnly": "rimraf dist && npm run build:production",
+    "publish-to-verdaccio": "npm publish --registry http://deps.lawpath.net:4873"
   },
   "umdGlobals": {
     "immutable": "Immutable"

@@ -2956,17 +2956,12 @@ var Text = function (_Record) {
             var node = this.set('marks', next);
             return node;
           } catch (error) {
-            console.log('There is an error ', error);
+            console.log('mark newProperties is null  ', error);
           }
         }
-        console.log('There is an error ', error);
+        console.log('mark properties is null', error);
       }
       return this;
-      // const mark = Mark.create(properties)
-      // const newMark = mark.merge(newProperties)
-      // const next = marks.remove(mark).add(newMark)
-      // const node = this.set('marks', next)
-      // return node
     }
 
     /**
